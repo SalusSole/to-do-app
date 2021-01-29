@@ -14,7 +14,7 @@ Los siguientes pasos le mostraran cómo clonar y ejecutar el proyecto localmente
 
 + Dirígase al la carpeta del proyecto:
 
-``$ cd todoapp/``
+``$ cd to-do-app/``
 
 + Installe las dependencias (con npm):
 
