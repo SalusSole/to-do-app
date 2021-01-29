@@ -41,7 +41,7 @@ function App() {
       setTaskItems(JSON.parse(data))
     } else {
       setTaskItems([
-        { name:'Task One Expample', done: false }
+        { name:'Agregar mi primera nota en Task App.', done: false }
       ])
       // setShowCompleted(true);
     }
