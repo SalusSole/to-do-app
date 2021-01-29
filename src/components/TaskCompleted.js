@@ -4,12 +4,6 @@ import Switch from '@material-ui/core/Switch';
 export const TaskCompleted = props => {
     return (
         <div className="form-check mt-3">
-            {/* <input
-                type="checkbox"
-                className="form-check-input"
-                checked={props.isChecked}
-                onChange={e => props.callback(e.target.checked)}
-            /> */}
             <label htmlFor="form-check-label">
                 Show Completed Tasks
             </label>
