@@ -6,6 +6,8 @@ Esta es una página de notas que persiste los datos en el local storage. Hecha c
 
 ## Descargar
 
+Los siguientes pasos le mostraran cómo clonar y ejecutar el proyecto localmente.
+
 + Clone el repositorio:
 
 ``$ git clone https://github.com/SalusSole/to-do-app.git``
