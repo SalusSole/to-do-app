@@ -68,7 +68,6 @@ export const TaskRow = props => {
     const updateNewTaskValue = e => setUpdateTaskName(e.target.value);
 
     const [updateTaskDone, setUpdateTaskDone] = useState(props.task.done);
-    const updateNewTaskDone = e => setUpdateTaskDone(e.target.value);
   
     const handleOpen = () => {
       setOpen(true);

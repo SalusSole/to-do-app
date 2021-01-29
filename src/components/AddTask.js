@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TextValidator } from 'react-material-ui-form-validator'
 
 //Material UI
 import TextField from '@material-ui/core/TextField';
