@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { TextValidator } from 'react-material-ui-form-validator'
 
+//Material UI
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 export const AddTask = props => {
 
     const [newTaskName, setNewTaskName] = useState('')
@@ -9,19 +13,24 @@ export const AddTask = props => {
     const creatNewTask = () => {
         props.callback(newTaskName);
         setNewTaskName('');
-    }
-
+    };
+    
     return (
         <div className="my-1">
-            <input
+            <TextField
+                variant="outlined"
+                label="Add a Task"
                 type="text"
-                className="form-controll"
+                multiline
+                rowsMax={10}
+                className="form-controll col-9"
                 value={newTaskName}
                 onChange={updateNewTaskValue}
+                required
             />
-            <button className="btn btn-primary mt-1" onClick={creatNewTask}>
+            <Button color="primary" className="mt-2" onClick={creatNewTask}>
                 Add
-            </button>
+            </Button>
         </div>
-    )
+    );
 }
