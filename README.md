@@ -12,7 +12,7 @@ Los siguientes pasos le mostraran cómo clonar y ejecutar el proyecto localmente
 
 ``$ git clone https://github.com/SalusSole/to-do-app.git``
 
-+ Dirígase al la carpeta del proyecto:
++ Dirígase a la carpeta del proyecto:
 
 ``$ cd to-do-app/``
 
@@ -24,10 +24,10 @@ Los siguientes pasos le mostraran cómo clonar y ejecutar el proyecto localmente
 
 ``$ yarn install``
 
-+ Para correr la página (con npm) ejecute:
++ Para correr la página en su navegador (con npm) ejecute:
 
 ``$ npm start``
 
-+ Para correr la página (con yarn) ejecute:
++ Para correr la página en su navegador (con yarn) ejecute:
 
 ``$ yarn start``
