@@ -16,11 +16,11 @@ Los siguientes pasos le mostraran cómo clonar y ejecutar el proyecto localmente
 
 ``$ cd to-do-app/``
 
-+ Installe las dependencias (con npm):
++ Instale las dependencias (con npm):
 
 ``$ npm install``
 
-+ Installe las dependencias (con yarn):
++ Instale las dependencias (con yarn):
 
 ``$ yarn install``
 
