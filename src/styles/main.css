@@ -132,6 +132,10 @@ span {
     padding: 10px 15px;
 }
 
+.form-user button:hover {
+    background: #314a96;
+}
+
 .form-user button span{
     color: white;
 }
