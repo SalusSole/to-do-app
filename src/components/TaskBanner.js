@@ -1,10 +1,8 @@
 import React from 'react';
+import './../styles/main.css';
 
 export const TaskBanner = props => (
-    <h4 className="bg-dark text-white text-center p-4">
-        Task App
-        <span className="text-success">
-            &nbsp;({props.taskItems.filter(t => !t.done).length > 0 ? props.taskItems.filter(t => !t.done).length + ' tasks to do' : 'Nothing to do'})
-        </span>
-    </h4>
+    <h1 className="title mb-4">
+        My Tasks
+    </h1>
 )

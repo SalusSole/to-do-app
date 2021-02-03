@@ -1,0 +1,203 @@
+.title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.app-container {
+    min-height: 100vh;
+    padding: 55px;
+    background-color: #f4f5f7;
+}
+
+.content {
+    background-color: white;
+}
+
+.td-checked{
+    width: 20px;
+}
+
+.task-name{
+    width: 220px;
+}
+
+.td-created{
+    width: 150px;
+}
+
+.td-click:hover{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.little-bold{
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.table {
+    border-top: 2px solid #c9c9d1;
+}
+
+.table td{
+    vertical-align: middle;
+}
+
+.MuiFormControlLabel-root{
+    margin-left: 0 !important;
+}
+
+.new-task{
+    border-bottom: 2px solid #ccc; 
+}
+
+label, input, textarea {
+    margin-bottom: 0 !important;
+    display: block;
+}
+input, textarea {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    border: 1px solid gray;
+}
+
+input:focus, textarea:focus{
+    border: 1px solid blue;
+}
+
+input:hover, textarea:hover{
+    border: 1.8px solid black;
+}
+
+.btn{
+    border-radius: 0px;
+}
+
+.btn-gray{
+    background: #e4e5e9
+}
+.btn-gray:hover{
+    background: #c7c8ca
+}
+
+.btn-blue{
+    background: #3c5cbf;
+    color: white
+}
+
+.btn-blue:hover{
+    background: #314a96;
+    color: white
+}
+
+span {
+    display: block;
+}
+
+.grid-content-created{
+    min-width: fit-content;
+    max-width: fit-content;
+    padding: 0px 5px;
+}
+
+.required {
+    display: none;
+}
+.show-required {
+    display: inline;
+    color: red;
+}
+
+.form-user{
+    width: 280px;
+    margin: 0px auto;
+    margin-top: 50px;
+}
+
+.form-user label{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-user input{
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.form-user button{
+    margin-top: 20px;
+    background: #3c5cbf;
+    padding: 10px 15px;
+}
+
+.form-user button span{
+    color: white;
+}
+
+@media (min-width: 1024px){
+    .created-span, .created-span-none, .calendar-icon{
+        display: inline;
+        margin: 0px 5px;
+    }
+}
+@media (max-width: 768px){
+
+    .grid-header{
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        grid-template-rows: auto auto;
+    }
+
+    .grid-content-tasks{
+        padding: 0;
+        grid-row: 1;
+        grid-column: 1;
+    }
+    .grid-content-created{
+        padding: 0;
+        grid-row: 2;
+        grid-column: 1;
+    }
+    .grid-content-add{
+        border-left: 1px solid #ccc;
+        padding: 0;
+        grid-row: 2;
+        grid-column: 2;
+    }
+
+    .created-span-none{
+        display: none;
+    }
+
+    .container-header {
+        width: 160px;
+        margin-right: 10px;
+    }
+    .created-span{
+        display: inline;
+    }
+
+    .app-container{
+        padding: 10px;
+    }
+
+    .tasks-col{
+        max-width: fit-content;
+        min-width: fit-content;
+    }
+
+    .td-details, .description-table{
+        display: none;
+    }
+
+    .btn-cancel{
+        float: left !important;
+    }
+    
+    .btn-save{
+        float: none !important;
+    }
+
+}

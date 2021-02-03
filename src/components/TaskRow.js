@@ -1,64 +1,48 @@
 import React, {useState} from 'react';
+//Styles
+import './../styles/details.css';
 //Material UI
-import { makeStyles } from '@material-ui/core/styles';
+//Colors
+import { green } from '@material-ui/core/colors';
 // Inputs
 import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import TextField from '@material-ui/core/TextField';
-//Menu
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 //Icons
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import IconButton from '@material-ui/core/IconButton';
 import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
-//core
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Snackbar from '@material-ui/core/Snackbar';
-//lab
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-} 
-
-const useStyles = makeStyles((theme) => ({
-    modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-}));
-
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CloseIcon from '@material-ui/icons/Close';
 
 export const TaskRow = props => {
     
     // States
     const [openSnackbar, setOpenSnackbar] = useState(false); //Snackbar
-    const [anchorEl, setAnchorEl] = React.useState(null); //Modal
     const [updateTaskName, setUpdateTaskName] = useState(props.task.name); //Tasks
-    const [open, setOpen] = useState(false); //Menu
-
-    // styles
-    const classes = useStyles();
+    const [taskDescription, setTaskDescription] = useState(props.task.description);
+    const [updateTaskDone, setUpdateTaskDone] = useState(props.task.done === 'true' || props.task.done === true ? true : false);
+    const [showDetails, setShowDetails] = useState(false);
+    const [required, setRequired] = useState('required'); //Validate Name
 
     // functions
+        //Set state by task name
+        // ***********************************************************************
+        const updateNewTaskName = e => {
+            setUpdateTaskName(e.target.value);
+            updateTaskName.length > 1 ? setRequired('required') : setRequired('show-required');
+        }
+        //Set state by task description
+        // ***********************************************************************
+        const updateNewTaskDesc = e => setTaskDescription(e.target.value);
         //set state by task updated 
         // ***********************************************************************
-        const updateNewTaskValue = e => setUpdateTaskName(e.target.value);
-        //set state by tasks
-        // ***********************************************************************
-        const [updateTaskDone, setUpdateTaskDone] = useState(props.task.done);
+        const updateNewTaskDone = e => setUpdateTaskDone(e.target.value);
+
+        const updateCheckDone = () => {
+            props.toggleTask(props.task);
+            setUpdateTaskDone(!props.task.done);
+        }
+
         //Snackbar 
         // *******************************************************************
         const handleClickSnackbar = () => {
@@ -70,14 +54,6 @@ export const TaskRow = props => {
             }
             setOpenSnackbar(false);
         };
-        //Modal
-        // ***********************************************************************
-        const handleClick = (event) => { setAnchorEl(event.currentTarget) };
-        const handleCloseMenu = () => { setAnchorEl(null) };
-        //Menu
-        // ***********************************************************************
-        const handleOpen = () => { setOpen(true) };
-        const handleClose = () => { setOpen(false) };
         //Delete task 
         // ***********************************************************************
         const deleteTask = () => {
@@ -86,99 +62,113 @@ export const TaskRow = props => {
         //Update task 
         // ***********************************************************************
         const updateTask = () => {
-            handleClickSnackbar();
-            handleClose();
-            props.updateTask(props.task, updateTaskName, updateTaskDone);
+            if(updateTaskName === ''){
+                setRequired('show-required')
+            }else{
+                handleClickSnackbar();
+                setShowDetails(false)
+                props.updateTask(props.task, updateTaskName, updateTaskDone, props.task.created, taskDescription);
+            }
         }
 
     return(
-        <div key={props.task.name} className="my-3 shadow rounded px-3 pt-3 pb-1" style={{}}>
-            <div className="row px-3">
-            <span
-                    className="col-12 align-self-center task-name"
-                    onClick={() => console.log("Hola mindp")}
-                >
-                    {props.task.name}
-                </span>
-            </div>
-            <div className="">
+        <tr key={props.task.name} className="" style={{}}>
+            <td class="td-checked">
                 <FormControlLabel
-                    className="ml-2 align-self-start"
+                    className=""
                     type="checkbox"
                     checked={props.task.done}
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    onChange={() => props.toggleTask(props.task)}
+                    inputProps={{ 'aria-label': 'checkbox' }}
+                    onChange={() => updateCheckDone()}
                     control={
                         <Checkbox 
                             icon={<CheckCircleOutlineRoundedIcon/>}
-                            checkedIcon={<CheckCircleRoundedIcon/>}
+                            checkedIcon={<CheckCircleRoundedIcon style={{color: green[500]}}/>}
                             name="checkedH"
                         />
                     }
                 />
-                <IconButton
-                    className="float-right align-self-start"
-                    aria-label="more"
-                    aria-controls="long-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                >
-                    <MoreVertIcon />
-                </IconButton>
-            </div>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleCloseMenu}
+            </td>
+            <td
+               className="task-name td-click"
+               onClick={() => setShowDetails(true)}
             >
-                <MenuItem onClick={deleteTask}>Delete</MenuItem>
-                <MenuItem onClick={handleOpen}>Edit</MenuItem>
-            </Menu>
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                timeout: 500,
-                }}
-            >
-                <Fade in={open}>
-                <div className={classes.paper}>
-                    <h2 id="transition-modal-title">Details</h2>
-                    <TextField
-                        variant="outlined"
-                        label="Edit Task"
-                        multiline
-                        rowsMax={10}
-                        type="text"
-                        id="transition-modal-description"
-                        className="form-controll"
-                        value={updateTaskName}
-                        onChange={updateNewTaskValue}
-                    />
-                    <Button
-                        className='p-3 text-success'
-                        onClick={updateTask}
-                    >
-                        Ok
-                    </Button>
-                    <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                        <Alert
-                            onClose={handleCloseSnackbar}
-                            severity='success'
-                        >
-                            Task updated
-                        </Alert>
-                    </Snackbar>
-                </div>
-                </Fade>
-            </Modal>
-        </div>
+                {props.task.name}
+            </td>
+            <td className="td-created td-click" onClick={() => setShowDetails(true)}>
+                {props.task.created}
+            </td>
+            <td className="td-click td-details" onClick={() => setShowDetails(true)}>
+                {props.task.description}
+            </td>
+
+            {
+                showDetails ? (
+                    <div>
+                        <div className="background" onClick={() => setShowDetails(false)}>
+                        </div>
+                        <div className="task-details">
+                            <button className="btn float-right mt-4 mr-3" onClick={() => {setShowDetails(false)}}>
+                                <CloseIcon fontSize="large"/>
+                            </button>
+                            <div className="content-details">
+                                <textarea
+                                    className="input-edit mb-4 font-weight-bolder"
+                                    value={updateTaskName}
+                                    onChange={updateNewTaskName}
+                                    placeholder="Title"
+                                    rows="1"
+                                >
+                                </textarea>
+                                <span id='required' className={required}>Required</span>
+                                <div className="dropdown">
+                                    <select name="done" value={updateTaskDone} onChange={updateNewTaskDone}>
+                                        <option value={false} selected={props.task.done ? 'selected' : ''}> Status: Pending</option>
+                                        <option value={true} selected={props.task.done ? 'selected' : ''}>Status: Completed</option>
+                                    </select>
+                                </div>
+                                <span className="font-weight-bold mt-4">
+                                    Created
+                                </span>
+                                <span className="mt-2">
+                                    {props.task.created}
+                                </span>
+                                <span className="mt-4 font-weight-bold">
+                                    Description
+                                </span>
+                                <textarea 
+                                    className="mt-2 textarea-edit"
+                                    value={taskDescription}
+                                    rows="4"
+                                    onChange={updateNewTaskDesc}
+                                    placeholder="Description"
+                                >
+                                </textarea>
+                                <span className="mt-4">
+                                    <p>
+                                        {props.task.updated ? 'Updated ' + props.task.updated + ',' : 'It has not been updated yet,'}
+                                    </p>
+                                    <p>
+                                        by {props.task.user}
+                                    </p> 
+                                </span>
+                            </div>
+                            <button 
+                                className="btn btn-edit btn-gray mr-3"
+                                onClick={updateTask}
+                            >
+                                <EditIcon style={{color: '#3b5cbd'}}/> Edit
+                            </button>
+                            <button
+                                className="btn btn-delete btn-gray"
+                                onClick={deleteTask}
+                            >
+                                <DeleteIcon style={{color: '#3b5cbd'}}/> Delete
+                            </button>
+                        </div>
+                    </div>
+                ) : <div></div> 
+            }
+        </tr>
     );
 }
