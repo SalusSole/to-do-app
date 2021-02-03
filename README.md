@@ -2,8 +2,6 @@
 
 Esta es una página de notas que persiste los datos en el local storage. Hecha con React y estilzada con Bootstrap y Material UI.
 
-![Task App](https://i.postimg.cc/8PMjwG8W/Task-App.png)
-
 ## Descargar
 
 Los siguientes pasos le mostraran cómo clonar y ejecutar el proyecto localmente.
